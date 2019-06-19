@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+*/
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body { 
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 14px;
+  margin: 0;
+}
+
+.center{
+    width: 75%;
+    margin: 10px auto;
+  }
+  
+  .main-div{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
