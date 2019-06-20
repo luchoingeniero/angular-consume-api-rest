@@ -18,7 +18,7 @@ export class Service<GenericInterface> {
     return `${this.apiUrl}/${this.servicio}`;
     }
      list(): Observable<any> {
-        return this.htttp.get(`${this.getUrlApi()}/`,{headers:this.headers});
+        return this.htttp.get(`${this.getUrlApi()}/`, { headers: this.headers}).pipe(map(data => data));;
       }
 
 

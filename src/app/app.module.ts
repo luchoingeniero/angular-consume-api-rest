@@ -14,7 +14,8 @@ import {
   MatInputModule,
   MatRippleModule,
   MatIconModule,
-  MatCardModule
+  MatCardModule,
+  MatTableModule
 } from '@angular/material';
 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -65,6 +66,7 @@ import { ShowComponent as UserShowComponent } from './components/users/show/show
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
+    MatTableModule,
     BrowserAnimationsModule,
     MatIconModule,
     MatCardModule,
