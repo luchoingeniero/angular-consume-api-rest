@@ -5,11 +5,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  userSubject = new Subject();
   private   url = environment.apiUrl;
   constructor(private htttp: HttpClient) { }
   headers: HttpHeaders = new HttpHeaders({
@@ -39,6 +41,7 @@ export class AuthService {
   }
 
   setUser(user: UserInterface) {
+    this.userSubject.next(user);
     sessionStorage.setItem('user', JSON.stringify(user));
   }
 
