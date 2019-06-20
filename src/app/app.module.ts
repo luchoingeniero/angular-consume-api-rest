@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { ApiInterceptor } from './interceptor/app.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +25,6 @@ import { HeaderComponent } from './components/layout/header/header.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { MainComponent } from './components/layout/main/main.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LogoutComponent } from './components/auth/logout/logout.component';
 import { PerfilComponent } from './components/auth/perfil/perfil.component';
 
 import { ListComponent as PeopleListComponent } from './components/peoples/list/list.component';
@@ -45,7 +46,6 @@ import { ShowComponent as UserShowComponent } from './components/users/show/show
     FooterComponent,
     MainComponent,
     DashboardComponent,
-    LogoutComponent,
     PerfilComponent,
     PeopleListComponent,
     PeopleCreateComponent,
@@ -71,7 +71,13 @@ import { ShowComponent as UserShowComponent } from './components/users/show/show
     MatSnackBarModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+              {
+                provide : HTTP_INTERCEPTORS,
+                useClass: ApiInterceptor,
+                multi   : true,
+              }
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
