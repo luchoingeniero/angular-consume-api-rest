@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
-import {AuthService} from '../../services/auth.service';
-import {UserInterface} from '../../model/userInterface';
+import {UserInterface} from '../../../model/userInterface';
+import { Router } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
-import {MatSnackBar} from '@angular/material/snack-bar';
+
+import {AuthService} from '../../../services/auth.service';
+import {UtilService} from '../../../services/util.service';
+
 
 export class FormErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -29,12 +32,11 @@ export class LoginComponent implements OnInit {
 
   matcher = new FormErrorStateMatcher();
 
-  constructor(private snackBar: MatSnackBar, private authService: AuthService) { }
+  constructor(private utilService: UtilService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    if (sessionStorage.getItem('user')) {
-      const user = JSON.parse(sessionStorage.getItem('user'));
-      console.log(user);
+    if (this.authService.isLogin()) {
+     this.router.navigate(['dashboard']);
 
     }
   }
@@ -46,15 +48,17 @@ export class LoginComponent implements OnInit {
                     .subscribe(
                       data => {
                         if (data.error) {
-                          this.snackBar.open(data.error, '', {
-                            duration: 3000
-                          });
+                          this.utilService.showMessage(data.error);
                         } else {
                           const user = jwt_decode(data.token);
-                          sessionStorage.setItem('user', JSON.stringify(user));
+                          this.authService.setUser(user);
+                          this.authService.setToken(data.token);
+                          this.router.navigate(['dashboard']);
+                          this.utilService.showMessage('Has Iniciado Correctamente');
                           }
                       },
                       error => {
+                        this.utilService.showMessage('Ha ocurrido un error enviado los datos al server!');
                         console.log(error);
                        }
                     );

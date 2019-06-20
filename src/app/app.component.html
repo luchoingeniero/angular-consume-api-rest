@@ -1,2 +1,10 @@
-<app-login></app-login>
-<router-outlet></router-outlet>
+<app-header [hidden]="hideElement"></app-header>
+<app-main>
+        <div class="container">
+         <router-outlet></router-outlet>
+        </div>
+        
+</app-main>
+<app-footer></app-footer>
+
+

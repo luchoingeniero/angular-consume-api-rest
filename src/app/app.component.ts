@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 
 @Component({
@@ -7,5 +8,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'App';
+ public hideElement: boolean;
+  constructor( private router: Router) {
+    this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+            if (event.url === '/' ) {
+                this.hideElement = true;
+            } else {
+                this.hideElement = false;
+            }
+        }
+    });
+}
+
+
 }

@@ -1,0 +1,19 @@
+<ul class="nav nav-pills breadcrumb">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="peoples">Peoples</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " routerLink="users">Users</a>
+        </li>
+        <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}},{{user.role}}</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" routerLink="/auth/perfil">Perfil</a>
+                  <a class="dropdown-item" (click)="logout()">Logout</a>
+                
+                </div>
+              </li>
+      </ul>

@@ -4,12 +4,13 @@ import { UserInterface } from '../model/userInterface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private   url = 'http://localhost:3000';
+  private   url = environment.apiUrl;
   constructor(private htttp: HttpClient) { }
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json'
@@ -23,6 +24,30 @@ export class AuthService {
         { headers: this.headers }
       )
       .pipe(map(data => data));
+  }
+
+  logut() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+  }
+
+  setToken(token: any) {
+    sessionStorage.setItem('token', token);
+  }
+  getToken() {
+    return sessionStorage.getItem('token');
+  }
+
+  setUser(user: UserInterface) {
+    sessionStorage.setItem('user', JSON.stringify(user));
+  }
+
+  getUser() {
+    return JSON.parse(sessionStorage.getItem('user'));
+  }
+
+  isLogin() {
+    return (this.getToken()) ? true : false;
   }
 
 }
