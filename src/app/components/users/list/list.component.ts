@@ -10,11 +10,12 @@ import { UserInterface } from '../../../model/userInterface';
 })
 export class ListComponent implements OnInit {
   users: any;
+  displayedColumns: string[] = ['id', 'username', 'role', 'acciones'];
   constructor(private userService: UsersService) { }
 
   ngOnInit() {
     this.userService.list().subscribe(
-      data => { console.log(data); },
+      data => { this.users = data; console.log(data); },
       error => { console.log(error); }
     );
   }
