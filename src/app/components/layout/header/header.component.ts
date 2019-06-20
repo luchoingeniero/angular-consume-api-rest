@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   user: UserInterface = {username: '', role: ''};
   constructor(private authService: AuthService, private utilService: UtilService, private router: Router ) {
+    if (authService.isLogin()) {
+      this.user = authService.getUser();
+    }
     authService.userSubject.subscribe((user) => {
      this.user = user;
    });
