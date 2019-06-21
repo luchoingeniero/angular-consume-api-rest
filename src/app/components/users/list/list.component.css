@@ -5,3 +5,8 @@ table {
 tr.mat-header-row {
     font-weight: bold;
   }
+
+.list-button-row button,
+.list-button-row a {
+  margin-right: 8px;
+}

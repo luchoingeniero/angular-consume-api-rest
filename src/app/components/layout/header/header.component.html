@@ -1,3 +1,37 @@
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/dashboard">Consume Api Rest</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" [ngClass]="{'active' : (url.startsWith('/dashboard'))}">
+            <a class="nav-link"routerLink="/dashboard">Home</a>
+          </li>
+          <li class="nav-item" [ngClass]="{'active' : (url.startsWith('/peoples'))}">
+            <a class="nav-link" routerLink="peoples">Peoples</a>
+          </li>
+          <li class="nav-item" [ngClass]="{'active' : (url.startsWith('/users'))}">
+            <a class="nav-link"  routerLink="users">Users</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.username}},{{user.role}}</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" routerLink="/auth/perfil">Perfil</a>
+              <a class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
+          </li>
+        </ul>
+        
+      </div>
+    </nav>
+  </header>
+
+
 <ul class="nav nav-pills breadcrumb">
         <li class="nav-item">
           <a class="nav-link" routerLink="/dashboard">Home</a>
